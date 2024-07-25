@@ -11,18 +11,16 @@ class WarriorTest extends \PHPUnit\Framework\TestCase
     public function testCanDie() {
 
         $warrior = new \Class\warrior();
-        $warriorHealth = $warrior->getHealth();
-        $newHealth = $warriorHealth - 100;
-        $this->assertEqual($newHealth, 0);
+        $warrior->takeDamage(100);
+        $this->assertFalse($warrior->isAlive());
 
     }
 
     public function testHealthReduction() {
 
         $warrior = new \Class\warrior();
-        $warriorHealth = $warrior->getHealth();
-        $newHealth = $warriorHealth - 20;
-        $this->assertEqual($warrior->getHealth(), 80);
+        $warrior->takeDamage(20);
+        $this->assertEquals($warrior->getHealth(), 80);
 
     }
 
