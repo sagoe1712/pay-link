@@ -1,20 +1,35 @@
 <?php
 
 namespace entities;
+include 'baseCharacterClass.php';
 
 Class warriorClass extends baseCharacterClass {
-    public function __construct()
+
+    private $armour;
+    private $swordDurability;
+
+    public function __construct($armour, $swordDurability)
     {
         $this->health = 100;
+        $this->armour = $armour;
+        $this->swordDurability = $swordDurability;
     }
 
     public function attack()
     {
-        // TODO: Implement attack() method.
+        $damage = rand(5, 15);
+        $this->swordDurability -= 1;
+        echo "Warrior attacks with sword dealing $damage damage (Sword durability: $this->swordDurability).\n";
+        return $damage;
     }
 
     public function defend($damage)
     {
-        // TODO: Implement defend() method.
+        $blockChance = rand(1, 10);
+        if ($blockChance <= 3) {
+            echo "Warrior blocks the attack.\n";
+        } else {
+            $this->takeDamage($damage);
+        }
     }
 }
