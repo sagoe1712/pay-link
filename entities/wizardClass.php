@@ -14,10 +14,10 @@ Class wizardClass extends baseCharacterClass {
         if ($this->mana > 0) {
             $damage = rand(10, 20);
             $this->mana -= 10;
-            echo "$this->name casts a spell dealing $damage damage (Mana remaining: $this->mana).\n";
+            echo "Wizard casts a spell dealing $damage damage (Mana remaining: $this->mana).\n";
         } else {
             $damage = rand(1, 5);
-            echo "$this->name uses wand dealing $damage damage.\n";
+            echo "Wizard uses wand dealing $damage damage.\n";
         }
         return $damage;
     }

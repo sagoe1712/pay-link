@@ -1,6 +1,7 @@
 <?php
 
 namespace entities;
+include 'baseCharacterClass.php';
 
 Class warriorClass extends baseCharacterClass {
 
