@@ -3,6 +3,11 @@
 ## Requirements
 - Docker
 
+##Clone Paylink Repository
+ ```sh
+   git clone git@github.com:sagoe1712/pay-link.git
+   ```
+
 ## Composer install
  ```sh
    composer install
@@ -19,7 +24,7 @@
    docker run --rm paylink
    ```
 ## To run PHP UNIT Test
-1. Install composer locally
+1. Install composer locally (if you don't have it installed locally)
 ```sh
    php composer-setup.php --install-dir=bin --filename=composer
    ```
