@@ -1,26 +1,64 @@
 <?php
+use PHPUnit\Framework\TestCase;
+use entities\wizardClass;
 class WizardTest extends \PHPUnit\Framework\TestCase
 {
-    public function testMaxHealth() {
+    public function testWizardInitialization() {
+        $wizard = new wizardClass(50);
 
-        $wizard = new \entities\wizardClass();
-        $this->assertEqual($wizard->getHealth(), 100);
-
+        $this->assertEquals(100, $wizard->getHealth());
+        $this->assertEquals(50, $wizard->getMana());
     }
 
-    public function testCanDie() {
+    public function testWizardAttackWithMana() {
+        $wizard = new wizardClass(50);
 
-        $wizard = new \entities\wizardClass();
-        $wizard->takeDamage(100);
-        $this->assertFalse($wizard->isAlive());
+        // Capture the output
+        $this->expectOutputRegex('/Wizard casts a spell dealing \d+ damage \(Mana remaining: \d+\).\n/');
+        $damage = $wizard->attack();
 
+        // Check if damage is within the expected range
+        $this->assertGreaterThanOrEqual(10, $damage);
+        $this->assertLessThanOrEqual(20, $damage);
     }
 
-    public function testHealthReduction() {
+    public function testWizardAttackWithoutMana() {
+        $wizard = new wizardClass(0);
 
-        $wizard = new \entities\wizardClass();
+        // Capture the output
+        $this->expectOutputRegex('/Wizard uses wand dealing \d+ damage.\n/');
+        $damage = $wizard->attack();
+
+        // Check if damage is within the expected range
+        $this->assertGreaterThanOrEqual(1, $damage);
+        $this->assertLessThanOrEqual(5, $damage);
+    }
+
+    public function testManaDecreasesOnSpellCast() {
+        $wizard = new wizardClass(50);
+
+        $manaBefore = $wizard->getMana();
+        $wizard->attack();  // Cast spell, reduces mana by 10
+        $manaAfter = $wizard->getMana();
+
+        $this->assertEquals($manaBefore - 10, $manaAfter);
+    }
+
+    public function testWizardDefend() {
+        $wizard = new wizardClass(50);
+        $initialHealth = $wizard->getHealth();
+        $damage = 10;
+
+        $wizard->defend($damage);
+        $this->assertEquals($initialHealth - $damage, $wizard->getHealth());
+    }
+
+    public function testTakeDamage() {
+        $wizard = new wizardClass(50);
+        $initialHealth = $wizard->getHealth();
+
         $wizard->takeDamage(20);
-        $this->assertEquals($wizard->getHealth(), 80);
-
+        $this->assertEquals($initialHealth - 20, $wizard->getHealth());
     }
+
 }

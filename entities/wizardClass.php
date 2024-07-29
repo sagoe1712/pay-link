@@ -26,4 +26,12 @@ Class wizardClass extends baseCharacterClass {
     {
         $this->takeDamage($damage);
     }
+
+    public function getHealth() {
+        return $this->health;
+    }
+
+    public function getMana() {
+        return $this->mana;
+    }
 }

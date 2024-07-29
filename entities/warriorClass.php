@@ -32,4 +32,15 @@ Class warriorClass extends baseCharacterClass {
             $this->takeDamage($damage);
         }
     }
+    public function getHealth() {
+        return $this->health;
+    }
+
+    public function getArmour() {
+        return $this->armour;
+    }
+
+    public function getSwordDurability() {
+        return $this->swordDurability;
+    }
 }
